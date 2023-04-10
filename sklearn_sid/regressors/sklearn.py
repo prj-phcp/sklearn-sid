@@ -15,12 +15,11 @@ class SYSIDRegressor(BaseEstimator, RegressorMixin, TransformerMixin):
     Herda dos principais objetos do sklearn
     '''
 
-    def __init__(self, nX, ny, preprocessor=None, expansor=None, estimator=LinearRegression(fit_intercept=False)):
+    def __init__(self, nX, ny, preprocessor=None, estimator=LinearRegression(fit_intercept=False)):
 
         self.nX = nX
         self.ny = ny
         self.preprocessor = preprocessor
-        self.expansor = expansor
         self.estimator = estimator
         
 
@@ -48,8 +47,6 @@ class SYSIDRegressor(BaseEstimator, RegressorMixin, TransformerMixin):
         if not self.preprocessor is None:
             X = self.preprocessor.transform(X)
         y, X = self.matReg(X, y)
-        if not self.expansor is None:
-            X = self.expansor.transform(X)
         return X, y
 
 
@@ -57,8 +54,6 @@ class SYSIDRegressor(BaseEstimator, RegressorMixin, TransformerMixin):
         if not self.preprocessor is None:
             X = self.preprocessor.fit_transform(X)
         y, X = self.matReg(X, y)
-        if not self.expansor is None:
-            X = self.expansor.fit_transform(X)
         return X, y
 
 
