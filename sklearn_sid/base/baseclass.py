@@ -8,23 +8,28 @@ class DimensionMismatchException(Exception):
     
     pass
 
-
 class SYSIDBase(BaseEstimator, TransformerMixin):
     '''
     Classe para identificacao de sistemas em conjunto com o sklearn.
     Herda dos principais objetos do sklearn
     '''
 
-    def __init__(self, nX, ny):
+    def __init__(self, nX, ny, preprocessor=None):
 
         self.nX = nX
         self.ny = ny
+        self.preprocessor=preprocessor
 
     def transform(self, X, y):
+        if not self.preprocessor is None:
+            X = self.preprocessor.transform(X)
         y, X = self.matReg(X, y)
         return X, y
 
+
     def fit_transform(self, X, y):
+        if not self.preprocessor is None:
+            X = self.preprocessor.fit_transform(X)
         y, X = self.matReg(X, y)
         return X, y
 
