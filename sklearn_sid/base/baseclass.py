@@ -1,5 +1,4 @@
-from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin
-from sklearn.linear_model import LinearRegression
+from sklearn.base import BaseEstimator, TransformerMixin
 from ..utils.dimension_operations import to_1D
 import numpy as np
 
@@ -21,33 +20,36 @@ class SYSIDBase(BaseEstimator, TransformerMixin):
         self.preprocessor=preprocessor
 
     def transform(self, X, y):
-        if not self.preprocessor is None:
+        if not self.preprocessor is None and not X is None:
             X = self.preprocessor.transform(X)
         y, X = self.matReg(X, y)
         return X, y
 
 
     def fit_transform(self, X, y):
-        if not self.preprocessor is None:
+        if not self.preprocessor is None and not X is None:
             X = self.preprocessor.fit_transform(X)
         y, X = self.matReg(X, y)
         return X, y
 
     def estimate_parameters(self, X, y):
 
-        nx = self.nX
         ny = self.ny
-
-        if len(X.shape) == 1: X = X.reshape(-1,1)
         if len(y.shape) == 1: y = y.reshape(-1,1)
-
         (N, ky) = y.shape
-        (Nx,kx) = X.shape
-
-        if isinstance(nx, int):
-            nx = [nx]*kx
         if isinstance(ny, int):
             ny = [ny]*ky
+        
+        if X is None:
+            nx = []
+            Nx = N
+            kx = 0
+        else:
+            nx = self.nX
+            if len(X.shape) == 1: X = X.reshape(-1,1)
+            (Nx,kx) = X.shape
+            if isinstance(nx, int):
+                nx = [nx]*kx
 
         p = np.max(ny+nx) + 1
 
