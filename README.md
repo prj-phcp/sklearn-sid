@@ -69,9 +69,6 @@ Para atualizar o arquivo com o ambiente após a instalação de algum pacote nov
 conda env export | grep -v "^prefix: " > environment.yml
 ```
 
-## Atividades
+## Lembrar
 
-As atividades presentes neste repositório são:
-
-- <a href="./Lista0">Lista 00</a>: Exercícios iniciais de programação matemática e quebra de gelo com o Python
-- <a href="./Lista1">Lista 01</a>: Implementação inicial dos métodos de busca linear
+TPOT tem um erro no numpy mais novo (/home/pedro-linux/miniconda3/envs/sklearn-sid-automl/lib/python3.11/site-packages/tpot/builtins/one_hot_encoder.py, np.float)
