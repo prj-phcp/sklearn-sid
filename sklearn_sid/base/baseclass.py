@@ -13,10 +13,11 @@ class SYSIDBase(BaseEstimator, TransformerMixin):
     Herda dos principais objetos do sklearn
     '''
 
-    def __init__(self, nX, ny, preprocessor=None):
+    def __init__(self, nX, ny, preprocessor=None, add_static=False):
 
         self.nX = nX
         self.ny = ny
+        self.add_static = add_static
         self.preprocessor=preprocessor
 
     def transform(self, X, y):
@@ -83,6 +84,8 @@ class SYSIDBase(BaseEstimator, TransformerMixin):
                 Phi[:,counter] = x[p-j-2: N-j-1].reshape(-1)
                 counter +=1
                 #print(Phi.shape, counter)
+        if self.add_static:
+            Phi = np.hstack((Phi, X[p-1:,:]))
         target = to_1D(target)
         return (target, Phi)
     

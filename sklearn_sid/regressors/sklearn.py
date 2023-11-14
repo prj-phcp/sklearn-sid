@@ -15,10 +15,10 @@ class SYSIDRegressor(SYSIDBase, RegressorMixin):
     Herda dos principais objetos do sklearn
     '''
 
-    def __init__(self, nX, ny, preprocessor=None, estimator=LinearRegression(fit_intercept=False)):
+    def __init__(self, nX, ny, preprocessor=None, add_static=False, estimator=LinearRegression(fit_intercept=False)):
 
         self.estimator = estimator
-        super().__init__(nX, ny, preprocessor=preprocessor)
+        super().__init__(nX, ny, preprocessor=preprocessor, add_static=add_static)
         
 
     def fit(self, X, y):

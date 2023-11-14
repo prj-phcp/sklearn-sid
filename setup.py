@@ -3,9 +3,9 @@ setup(
     name = 'sklearn-sid',
     packages = [
         'sklearn_sid',
-        #'sklearn_sid.base',
-        #'sklearn_sid.regressors',
-        #'sklearn_sid.utils',
+        'sklearn_sid.base',
+        'sklearn_sid.regressors',
+        'sklearn_sid.utils',
                 ],
     install_requires=[
         "scikit-learn==1.2.2",
