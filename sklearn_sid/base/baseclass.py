@@ -84,6 +84,10 @@ class SYSIDBase(BaseEstimator, TransformerMixin):
                 Phi[:,counter] = x[p-j-2: N-j-1].reshape(-1)
                 counter +=1
                 #print(Phi.shape, counter)
+
+        #protecao temporaria para legado
+        if not hasattr(self, 'add_static'): self.add_static = False
+        
         if self.add_static:
             Phi = np.hstack((Phi, X[p-1:,:]))
         target = to_1D(target)
